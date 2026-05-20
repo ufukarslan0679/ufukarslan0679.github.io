@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NetAidat Hesap ve Veri Silme Talebi</title>
+  <meta name="description" content="NetAidat kullanıcıları için hesap ve ilişkili verilerin silinmesini talep etme adımları.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3fafb;
+      --card: #ffffff;
+      --text: #10242b;
+      --muted: #5f747a;
+      --primary: #0e6a79;
+      --border: #d5e7ea;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 32px auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 18px 42px rgba(14, 106, 121, 0.12);
+    }
+
+    h1,
+    h2 {
+      line-height: 1.25;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--primary);
+      font-size: clamp(28px, 5vw, 42px);
+    }
+
+    h2 {
+      margin-top: 28px;
+      color: var(--text);
+      font-size: 22px;
+    }
+
+    p,
+    li {
+      font-size: 16px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .notice {
+      border-left: 5px solid var(--primary);
+      background: #eaf6f8;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin: 18px 0;
+    }
+
+    .danger {
+      border-left-color: var(--danger);
+      background: #fff1f0;
+    }
+
+    a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    code {
+      background: #eef5f6;
+      border-radius: 8px;
+      padding: 2px 6px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NetAidat Hesap ve Veri Silme Talebi</h1>
+    <p class="muted">Son güncelleme: 21 Mayıs 2026</p>
+
+    <p>
+      Bu sayfa, NetAidat mobil uygulamasında oluşturulan kullanıcı hesabının ve ilişkili verilerin silinmesini talep etmek isteyen kullanıcılar için hazırlanmıştır.
+    </p>
+
+    <div class="notice">
+      <strong>Uygulama:</strong> NetAidat<br>
+      <strong>Geliştirici:</strong> NetAidat / Ufuk Arslan<br>
+      <strong>İletişim:</strong> <a href="mailto:netaidatufuk@gmail.com">netaidatufuk@gmail.com</a>
+    </div>
+
+    <h2>Hesabınızı uygulama içinden silme</h2>
+    <ol>
+      <li>NetAidat uygulamasını açın.</li>
+      <li>Hesabınızla giriş yapın.</li>
+      <li><strong>Profil</strong> sayfasına gidin.</li>
+      <li><strong>Hesabımı Sil</strong> seçeneğine dokunun.</li>
+      <li>Ekrandaki uyarıları okuyup işlemi onaylayın.</li>
+    </ol>
+
+    <h2>E-posta ile hesap silme talebi</h2>
+    <p>
+      Uygulamaya erişemiyorsanız veya hesabınızı e-posta yoluyla sildirmek istiyorsanız aşağıdaki adımları izleyebilirsiniz:
+    </p>
+    <ol>
+      <li><a href="mailto:netaidatufuk@gmail.com?subject=NetAidat%20Hesap%20Silme%20Talebi">netaidatufuk@gmail.com</a> adresine e-posta gönderin.</li>
+      <li>E-posta konusu olarak <code>NetAidat Hesap Silme Talebi</code> yazın.</li>
+      <li>Talep ettiğiniz hesabın e-posta adresini belirtin.</li>
+      <li>Gerekirse hesabın size ait olduğunu doğrulamaya yardımcı olacak ek bilgiler istenebilir.</li>
+    </ol>
+
+    <h2>Silinen veri türleri</h2>
+    <p>Talebiniz doğrulandıktan sonra, NetAidat tarafından yönetilen erişilebilir hesap verileri ve uygulamayla ilişkili veriler silinir veya anonimleştirilir.</p>
+    <ul>
+      <li>Firebase Authentication üzerindeki kullanıcı hesabı ve oturum kimliği.</li>
+      <li>Uygulama tarafından tutulan kullanıcıya bağlı premium/erişim kayıtları.</li>
+      <li>Uygulama içinde oluşturulan bina, kişi, aidat, tahsilat, gelir-gider, makbuz, rapor ve benzeri yerel kayıtlar, uygulama içi silme işlemi yapıldığında cihazdan temizlenebilir.</li>
+    </ul>
+
+    <h2>Saklanabilecek veya kullanıcı sorumluluğunda olan veriler</h2>
+    <ul>
+      <li>Kullanıcının daha önce dışa aktardığı PDF, rapor, makbuz, görsel veya yedek dosyaları kullanıcının seçtiği cihaz, Google Drive ya da paylaşım hedeflerinde kalabilir. Bu dosyaların silinmesi kullanıcının sorumluluğundadır.</li>
+      <li>Google Play, App Store, Firebase, AdMob, Analytics veya Crashlytics gibi üçüncü taraf servislerde tutulan sınırlı teknik kayıtlar ilgili servislerin saklama ve silme politikalarına tabidir.</li>
+      <li>Yasal yükümlülükler, güvenlik, dolandırıcılık önleme veya uyuşmazlık çözümü için gerekli olan sınırlı kayıtlar mevzuatın izin verdiği süre boyunca saklanabilir.</li>
+    </ul>
+
+    <h2>İşlem süresi</h2>
+    <p>
+      E-posta ile iletilen hesap silme talepleri, hesabın doğrulanmasından sonra makul süre içinde ve en geç 30 gün içinde işleme alınır.
+    </p>
+
+    <div class="notice danger">
+      Hesap silme işlemi geri alınamaz. Silme işleminden önce ihtiyaç duyduğunuz kayıtların ve yedeklerin size ait kopyalarını kontrol etmeniz önerilir.
+    </div>
+
+    <footer>
+      NetAidat 2026 - Hesap ve veri silme bilgilendirme sayfası
+    </footer>
+  </main>
+</body>
+</html>
