@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NetAidat Gizlilik Politikası</title>
-  <meta name="description" content="NetAidat mobil uygulaması gizlilik politikası, veri işleme, saklama, yedekleme ve kullanıcı hakları bilgileri.">
+  <meta name="description" content="NetAidat mobil uygulamasının veri toplama, kullanma, paylaşma, saklama ve silme uygulamalarını açıklayan gizlilik politikası.">
   <style>
     :root {
       color-scheme: light;
@@ -17,9 +17,7 @@
       --soft: #eaf6f8;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -35,20 +33,16 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 28px;
+      padding: clamp(22px, 5vw, 38px);
       box-shadow: 0 18px 42px rgba(14, 106, 121, 0.12);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      color: var(--primary);
-      line-height: 1.25;
-      font-size: clamp(28px, 5vw, 42px);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
+    h1, h2, h3 { line-height: 1.3; }
+    h1 { margin: 0 0 8px; color: var(--primary); font-size: clamp(28px, 5vw, 42px); }
+    h2 { margin-top: 34px; color: var(--primary); font-size: 24px; }
+    h3 { margin-top: 24px; font-size: 19px; }
+    p, li { font-size: 16px; }
+    .muted { color: var(--muted); }
 
     .notice {
       border-left: 5px solid var(--primary);
@@ -58,234 +52,162 @@
       margin: 18px 0;
     }
 
-    .policy {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 16px;
-      margin: 0;
-    }
-
-    a {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    footer {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    a { color: var(--primary); font-weight: 700; overflow-wrap: anywhere; }
+    footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
   </style>
 </head>
 <body>
   <main>
     <h1>NetAidat Gizlilik Politikası</h1>
-    <p class="muted">Son Güncelleme: 17 Mayıs 2026</p>
+    <p class="muted">Son güncelleme: 18 Temmuz 2026</p>
+
     <div class="notice">
-      Bu sayfa NetAidat mobil uygulamasının gizlilik politikasını kamuya açık şekilde sunmak amacıyla hazırlanmıştır.
+      Bu politika, NetAidat mobil uygulamasında kişisel ve hassas kullanıcı verilerinin nasıl işlendiğini açıklar. NetAidat, kullanıcı verilerini satmaz.
     </div>
-    <pre class="policy">NETAİDAT GİZLİLİK POLİTİKASI
-Son Güncelleme: 17 Mayıs 2026
 
-Bu Gizlilik Politikası, NetAidat mobil uygulamasının hangi tür verileri işleyebileceğini, bu verilerin hangi amaçlarla kullanıldığını, nasıl saklandığını, kimlerle paylaşılabileceğini ve kullanıcıların veri haklarını açıklamak amacıyla hazırlanmıştır.
-
-NetAidat; apartman, site ve bina yönetimlerinin yönetim süreçlerini dijital ortamda takip etmesine yardımcı olan bir mobil uygulamadır. Uygulamayı kullanabilmek için Firebase altyapısı üzerinden Gmail veya e-posta adresi ile oturum açılması zorunludur. Uygulamada artık yerel hesap oluşturma veya yerel hesapla oturum açma yöntemi bulunmamaktadır.
-
-Bu politikada "uygulama", NetAidat mobil uygulamasını; "kullanıcı", uygulamayı kullanan bina yöneticisi, yönetim temsilcisi veya yetkili kişiyi ifade eder.
-
-Veri sorumlusu / geliştirici iletişim:
-NetAidat
-E-posta: netaidatufuk@gmail.com
-
-1. İşlenen Veri Türleri
-
-NetAidat, uygulamanın temel işlevlerini yerine getirebilmek için kullanıcının uygulamaya girdiği veya uygulama içinde oluşturduğu verileri işleyebilir.
-
-İşlenebilecek veriler genel olarak şu kategorilerdedir:
-
-- Hesap ve oturum bilgileri: Firebase Authentication vasıtasıyla sağlanan Gmail adresi, e-posta adresi ve benzersiz kullanıcı kimliği (UID).
-- Bina ve yönetim bilgileri: Bina adı, adres, yönetimsel tanımlamalar ve bina ayarları.
-- Bağımsız bölüm ve ortak alan bilgileri.
-- Malik, kiracı, bina sakini veya ilgili kişilere ait ad, soyad, telefon ve iletişim bilgileri.
-- Telefon, adres ve uygulama içi iletişim kayıtları.
-- Aidat, tahsilat, gelir-gider, borç/alacak, kasa, makbuz ve rapor kayıtları.
-- Makbuz, rapor, belge ve QR doğrulama bilgileri.
-- Hizmet sağlayıcı veya tedarikçi bilgileri.
-- Kullanıcının kaydettiği abonelik ve referans numaraları.
-- Kullanıcının kendi cihazında veya harici depolama alanlarında oluşturduğu yedekleme ve geri yükleme dosyalarına ilişkin yapısal veriler.
-- Premium erişim ve uygulama içi satın alma durumunun doğrulanmasına ilişkin sınırlı işlem ve yetkilendirme bilgileri.
-- Uygulamanın kararlı çalışması, güvenliği, Firebase Crashlytics hata analizi, Firebase Analytics kullanım analizi ve reklam gösterimi için gerekli sınırlı teknik bilgiler.
-
-NetAidat, kullanıcının uygulamaya girmediği veya uygulama işlevleri için gerekli olmayan kişisel verileri bilerek toplamaz.
-
-2. Verilerin Kullanım Amaçları
-
-NetAidat verileri aşağıdaki amaçlarla işler:
-
-- Firebase altyapısı üzerinden oturum açma, kullanıcı kimlik doğrulama ve hesap işlemlerini yürütmek.
-- Bina yönetimi kayıtlarını oluşturmak, saklamak ve finansal takibi sağlamak.
-- Yönetimsel ve finansal kayıtların takip edilmesini sağlamak.
-- Kullanıcının talebiyle belge, makbuz veya mali rapor oluşturmak.
-- Belge bütünlüğünü ve QR doğrulama mekanizmalarını desteklemek.
-- Malik ve kiracı kayıtlarında yer alan telefon numaraları üzerinden, kullanıcının uygulama içi tetiklemesiyle cihazın arama ekranını açmak veya WhatsApp üzerinden mesaj gönderme işlemini başlatmak.
-- Kullanıcının tetiklemesiyle yerel yedekleme oluşturmak, yedeği geri yüklemek veya kullanıcının seçtiği harici servisler ya da paylaşım hedefleri üzerinden Google Drive gibi alanlara yedek dosyası aktarmak.
-- Uygulama güvenliğini, veri bütünlüğünü ve belge kontrol mekanizmalarını sağlamak.
-- Kullanıcı destek ve hata bildirim taleplerini değerlendirmek.
-- Free sürümde reklam gösterimi yapmak ve Premium sürümde reklamsız kullanım sunmak.
-- Google Play veya App Store üzerinden yapılan tek seferlik ömür boyu uygulama içi satın alma durumunu doğrulamak, geri yüklemek ve premium erişimi yönetmek.
-
-3. Verilerin Saklanması ve Yedekleme Yapısı
-
-NetAidat temel olarak kullanıcının cihazında çalışan bir mobil uygulamadır. Uygulama içinde oluşturulan kayıtlar cihazdaki yerel veritabanında saklanabilir.
-
-Oturum verileri: Kullanıcının e-posta veya Gmail ile giriş bilgileri, güvenli kimlik doğrulama amacıyla Firebase / Google altyapısında saklanır.
-
-Yerel yedekleme: Kullanıcı dilerse cihazın dosya sistemi üzerinde yerel bir yedekleme dosyası oluşturabilir.
-
-Harici ve bulut yedekleme: Kullanıcı uygulama içindeki "Paylaş", "Yedekle" veya benzeri işlevleri kullanarak yedek dosyalarını kendi kontrolündeki Google Drive hesabına, cihaz paylaşım menüsündeki uygulamalara veya diğer harici depolama/paylaşım platformlarına aktarabilir. Bu işlem kullanıcının açık eylemiyle gerçekleşir.
-
-Yedek dosyalarının saklandığı konum, paylaşım hedefi, erişim yetkileri, güvenliği ve silinme süreçleri tamamen kullanıcının sorumluluğundadır. NetAidat, kullanıcının kendi oluşturduğu veya harici platformlara aktardığı yedek dosyalarının güvenliğini garanti edemez.
-
-4. Verilerin Paylaşılması ve Üçüncü Taraf Entegrasyonları
-
-NetAidat, kullanıcı verilerini reklam amacıyla satmaz, kiralamaz veya ticari pazarlama amacıyla üçüncü kişilerle paylaşmaz.
-
-Veriler yalnızca aşağıdaki durumlarda üçüncü taraf servislerle işlenebilir veya paylaşılabilir:
-
-4.1. Firebase / Google altyapısı
-Çevrim içi oturum açma, kullanıcı doğrulama, uygulama güvenliği, Firebase Crashlytics ile hata analizi, Firebase Analytics ile sınırlı kullanım analizi ve gerekli uygulama servisleri için Firebase / Google altyapısı kullanılabilir. Bu işlemler Google'ın kendi gizlilik politikası ve hizmet şartlarına tabidir.
-
-4.2. Google Drive ve paylaşım hedefleri
-Kullanıcı Google Drive yedekleme veya paylaşım özelliğini kullanırsa, ilgili işlem kullanıcının Google hesabı, seçtiği paylaşım hedefi ve verdiği izinler kapsamında gerçekleşir. Google Drive'a veya başka bir paylaşım hedefine aktarılan dosyaların yönetimi ve silinmesi kullanıcının sorumluluğundadır.
-
-4.3. Telefon ve WhatsApp işlemleri
-Kullanıcı uygulama içerisindeki arama veya WhatsApp butonuna bastığında ilgili telefon numarası cihazın arama sistemi, WhatsApp veya kullanıcının seçtiği iletişim uygulaması ile paylaşılabilir. Bu işlem tamamen kullanıcının açık eylemiyle başlar ve seçilen platformun kendi gizlilik şartlarına tabidir.
-
-4.4. Reklam hizmetleri
-NetAidat'ın Free sürümünde Google AdMob aracılığıyla banner reklamlar gösterilebilir. Reklam gösterimi sırasında Google, reklam kimliği, cihaz bilgisi, IP adresi, çerez/benzeri tanımlayıcılar ve reklam performans verileri gibi sınırlı teknik verileri kendi politikaları kapsamında işleyebilir. NetAidat, bina yönetimi kayıtlarını, malik/kiracı bilgilerini, finansal kayıtları veya yedek dosyalarını reklam amacıyla Google'a aktarmaz.
-
-4.5. Uygulama içi satın alma hizmetleri
-Premium erişim tek seferlik ömür boyu uygulama içi satın alma ile etkinleştirildiğinde, satın alma işlemi Google Play veya App Store ödeme altyapısı üzerinden yürütülür. NetAidat ödeme kartı bilgilerini işlemez veya saklamaz. Satın alma durumu, premium erişimi doğrulamak, geri yüklemek ve yetkisiz erişimi önlemek amacıyla sınırlı işlem bilgileri üzerinden kontrol edilebilir.
-
-4.6. Kullanıcı tarafından başlatılan diğer paylaşımlar
-Kullanıcı bir belge, rapor, PDF dosyası, görsel veya yedeği paylaşırsa, paylaşım kullanıcının seçtiği uygulama veya servis üzerinden gerçekleşir. Bu paylaşım kullanıcının açık eylemiyle yapılır.
-
-4.7. Yasal zorunluluklar
-Geçerli mevzuat, resmi makam talepleri veya hukuki yükümlülükler kapsamında gerekli olması halinde sınırlı veri paylaşımı yapılabilir.
-
-5. Kullanılan İzinler
-
-NetAidat aşağıdaki Android izinlerini veya platform yetkilerini kullanabilir:
-
-5.1. İnternet erişimi (INTERNET)
-Firebase ile oturum açma, Google servisleri, Google Drive yedekleme, reklam gösterimi, destek bağlantıları, belge paylaşımı ve uygulama servislerinin çalışması için kullanılır.
-
-5.2. Kamera erişimi (CAMERA)
-QR kod okutma, belge doğrulama, bina kapak fotoğrafı veya kullanıcının açıkça seçtiği fotoğraf işlemleri için kullanılır. Kamera izni kullanıcının ilgili işlemi başlatması halinde tetiklenir.
-
-5.3. Dosya / depolama erişimi
-Uygulama, yedek dosyası oluşturma, geri yükleme, PDF oluşturma, rapor paylaşma, görsel seçme veya kullanıcının seçtiği dosyaları işleme amacıyla cihaz dosya sistemiyle etkileşime girebilir. Dosya ve medya erişimi kullanıcının başlattığı işlemle sınırlıdır.
-
-5.4. Telefon / arama işlemleri
-Kullanıcı, malik veya kiracı kartlarındaki telefon numaralarına tıkladığında cihazın arama ekranına yönlendirilebilir veya cihazın arama altyapısı tetiklenebilir. Bu işlem kullanıcının açık eylemiyle gerçekleşir.
-
-5.5. Reklam kimliği
-Free sürümde reklam gösterimi için Google Play hizmetleri ve AdMob tarafından reklam kimliği veya benzeri teknik tanımlayıcılar kullanılabilir. Bu kullanım Google'ın reklam ve gizlilik politikalarına tabidir.
-
-5.6. Uygulama içi satın alma
-Premium erişimin satın alınması veya geri yüklenmesi sırasında Google Play ya da App Store uygulama içi satın alma altyapısı kullanılabilir. Ödeme bilgileri NetAidat tarafından saklanmaz.
-
-6. Finansal ve Hassas Veriler
-
-NetAidat'ta tutulan yönetimsel, finansal, iletişim ve belge kayıtları hassas nitelikte olabilir.
-
-Bu veriler:
-- Uygulama işlevlerini sağlamak dışında kullanılmaz.
-- NetAidat tarafından reklam amacıyla satılmaz.
-- Yetkisiz kişilerle paylaşılmaz.
-- Kullanıcının oluşturduğu yedeklerde yer alabilir.
-
-Kullanıcı, uygulamaya girdiği kişisel ve finansal verilerin doğruluğundan ve bu verileri işleme yetkisine sahip olduğundan sorumludur.
-
-7. QR Doğrulama ve Belge Bütünlüğü
-
-NetAidat tarafından oluşturulan bazı belgelerde QR doğrulama özelliği bulunabilir.
-
-QR doğrulama sistemi, belgenin uygulamadaki kayıtlarla uyumunu kontrol etmeye yardımcı olur. Bu özellik belge üzerinde sonradan değişiklik yapılıp yapılmadığını anlamaya yardımcı olabilir.
-
-Ancak QR doğrulama resmi kurum doğrulaması, noter onayı veya hukuki kesinlik anlamına gelmez.
-
-8. Veri Güvenliği
-
-NetAidat, verilerin güvenli işlenmesi için aşağıdaki ilkelere göre tasarlanmıştır:
-
-- Kayıtlar ilgili bina ve kullanıcı işlemleri kapsamında tutulur.
-- Finansal ve yönetimsel işlemlerde veri bütünlüğü korunmaya çalışılır.
-- Kullanıcının talebiyle oluşturulan belgelerde doğrulama mekanizmaları kullanılabilir.
-- Kullanıcı yedekleri kendi kontrolündeki dosya, paylaşım hedefi veya Drive alanında saklar.
-- Çevrim içi servislerle iletişimde modern güvenlik altyapıları kullanılır.
-
-Bununla birlikte hiçbir dijital sistem mutlak güvenlik garantisi vermez. Kullanıcı cihaz güvenliğini sağlamak, ekran kilidi kullanmak, yedek dosyalarını korumak ve şifrelerini üçüncü kişilerle paylaşmamakla sorumludur.
-
-9. Veri Saklama Süresi
-
-Veriler, kullanıcı uygulamayı kullandığı ve kayıtları silmediği sürece cihazda veya kullanıcının tercih ettiği yedekleme/paylaşım alanlarında saklanabilir.
-
-Kullanıcı:
-- Uygulama içindeki kayıtları silebilir.
-- Yedek dosyalarını silebilir.
-- Uygulamayı kaldırarak cihazdaki uygulama verilerini silebilir.
-- Google Drive veya başka bir depolama/paylaşım alanına yüklediği yedekleri ilgili servis üzerinden silebilir.
-
-Yedek dosyalarının saklama süresi kullanıcının seçtiği depolama alanına ve kendi silme tercihine bağlıdır.
-
-10. Veri Silme ve Hesap Silme Talepleri
-
-Kullanıcılar veri silme veya hesap silme talepleri için aşağıdaki e-posta adresinden iletişime geçebilir:
-
-netaidatufuk@gmail.com
-
-Talep değerlendirilirken kullanıcıdan hesabı veya ilgili veri kaydını doğrulamaya yardımcı olacak bilgiler istenebilir.
-
-Uygulama içinden oluşturulan yerel veriler kullanıcının cihazında bulunduğundan, cihazdaki uygulama verilerinin silinmesi veya uygulamanın kaldırılması yerel verilerin silinmesine neden olabilir. Ancak daha önce oluşturulmuş yedek dosyaları, kullanıcının seçtiği konumlarda ayrıca kalabilir. Bu dosyaların silinmesi kullanıcının sorumluluğundadır.
-
-11. Çocukların Gizliliği
-
-NetAidat çocuklara yönelik bir uygulama değildir. Uygulama apartman ve site yönetimi amacıyla yetişkin kullanıcılar için geliştirilmiştir.
-
-Uygulama bilerek çocuklardan veri toplamaz. Ancak kullanıcı, bina yönetimi kapsamında üçüncü kişilere veya çocuklara ait bilgileri uygulamaya girerse, bu verilerin hukuka uygun şekilde girilmesinden kullanıcı sorumludur.
-
-12. Kullanıcının Hakları
-
-Kullanıcı, geçerli mevzuat kapsamında:
-- Hangi verilerin işlendiğini öğrenme
-- Verilerin düzeltilmesini talep etme
-- Verilerin silinmesini talep etme
-- İşleme amacını öğrenme
-- Destek talebi oluşturma
-
-haklarına sahip olabilir.
-
-Bu haklara ilişkin talepler için iletişim:
-netaidatufuk@gmail.com
-
-13. Politika Değişiklikleri
-
-Bu Gizlilik Politikası uygulama özellikleri, yasal gereklilikler veya Google Play politikalarındaki değişikliklere göre güncellenebilir.
-
-Politika değiştiğinde güncelleme tarihi yenilenir. Kullanıcı uygulamayı kullanmaya devam ederek güncel politikayı kabul etmiş sayılır.
-
-14. İletişim
-
-Gizlilik, veri güvenliği, hesap silme, veri silme veya destek talepleri için:
-
-E-posta: netaidatufuk@gmail.com
-
-NetAidat</pre>
-    <footer>
-      © 2026 NetAidat. Tüm hakları saklıdır.
-    </footer>
+    <p>
+      NetAidat; apartman, site ve bina yönetimi kayıtlarının takip edilmesine yardımcı olan bir mobil uygulamadır. Bu politikada “uygulama” NetAidat’ı, “kullanıcı” ise uygulamayı kullanan bina yöneticisini, yönetim temsilcisini veya yetkili kişiyi ifade eder.
+    </p>
+
+    <p>
+      <strong>Uygulama / geliştirici:</strong> NetAidat / Ufuk Arslan<br>
+      <strong>Gizlilik iletişimi:</strong> <a href="mailto:netaidatufuk@gmail.com">netaidatufuk@gmail.com</a>
+    </p>
+
+    <h2>1. İşlenen veri türleri</h2>
+
+    <h3>1.1. Hesap ve kimlik doğrulama bilgileri</h3>
+    <ul>
+      <li>Ad ve soyad veya Google hesabından sağlanan görünen ad.</li>
+      <li>E-posta adresi.</li>
+      <li>Firebase kullanıcı kimliği (UID), oturum ve kimlik doğrulama bilgileri.</li>
+      <li>Google ile giriş kullanıldığında Google tarafından kimlik doğrulama için sağlanan sınırlı hesap bilgileri.</li>
+    </ul>
+
+    <h3>1.2. Kullanıcının oluşturduğu bina yönetimi verileri</h3>
+    <ul>
+      <li>Bina, bağımsız bölüm, ortak alan ve yönetim ayarları.</li>
+      <li>Malik, kiracı, bina sakini, hizmet sağlayıcı veya ilgili kişilere ait ad, soyad, telefon, adres ve iletişim bilgileri.</li>
+      <li>Aidat, tahakkuk, tahsilat, avans, gelir-gider, borç/alacak, kasa, makbuz ve rapor kayıtları.</li>
+      <li>Belge, PDF, görsel, QR doğrulama, abonelik ve referans numarası bilgileri.</li>
+      <li>Yedekleme ve geri yükleme dosyalarında bulunan uygulama verileri.</li>
+    </ul>
+    <p>
+      Bu yönetim ve finans kayıtları esas olarak cihazdaki yerel veritabanında tutulur. Kullanıcı Google Drive yedeklemesini veya dışa aktarma/paylaşma işlevini başlatmadıkça NetAidat bu kayıtları kendiliğinden buluta yüklemez.
+    </p>
+
+    <h3>1.3. Satın alma ve premium erişim bilgileri</h3>
+    <ul>
+      <li>Satın alınan ürünün kimliği ve satın alma durumu.</li>
+      <li>Google Play sipariş kimliği, satın alma zamanı ve satın alma belirtecinin geri döndürülemez özeti.</li>
+      <li>Premium durumu, ek bina hakkı, doğrulama, geri yükleme, iade/iptal ve hak aktarımı kayıtları.</li>
+    </ul>
+    <p>NetAidat ödeme kartı veya banka kartı bilgilerini almaz ve saklamaz. Ödeme Google Play tarafından yürütülür.</p>
+
+    <h3>1.4. Teknik, tanılama, kullanım ve reklam verileri</h3>
+    <ul>
+      <li>Uygulama ekran görüntüleme ve etkileşim olayları, uygulama açılışı ve benzeri uygulama içi kullanım bilgileri.</li>
+      <li>Çökme kayıtları, hata yığınları, tanılama bilgileri, uygulama durumu ve performans bilgileri.</li>
+      <li>Cihaz modeli, işletim sistemi, uygulama ve SDK sürümü, ağ bağlantısı türü ve Firebase kurulum kimliği gibi teknik bilgiler.</li>
+      <li>IP adresi. IP adresi, Firebase hizmetlerinin güvenliği ve Cloud Functions çağrıları için; ayrıca Google Mobile Ads tarafından cihazın genel/yaklaşık konumunu tahmin etmek için işlenebilir.</li>
+      <li>Free sürümde reklam kimliği, uygulama seti kimliği ve benzeri cihaz veya hesap tanımlayıcıları.</li>
+    </ul>
+
+    <h2>2. Verilerin kullanım amaçları</h2>
+    <ul>
+      <li>Hesap oluşturmak, oturum açmak, kimlik doğrulamak ve hesap güvenliğini sağlamak.</li>
+      <li>Bina yönetimi ve finansal takip özelliklerini çalıştırmak.</li>
+      <li>Makbuz, rapor, PDF, yedek ve QR doğrulama çıktıları oluşturmak.</li>
+      <li>Premium satın alımları doğrulamak, geri yüklemek, doğru kullanıcıya bağlamak ve ek bina haklarını yönetmek.</li>
+      <li>İade veya iptal edilen satın alımları işlemek; dolandırıcılığı, aynı satın alımın yetkisiz kullanımını ve teknik kötüye kullanımı önlemek.</li>
+      <li>Uygulama hatalarını tespit etmek, kararlılığı ve performansı geliştirmek ve destek taleplerini incelemek.</li>
+      <li>Uygulama kullanımını toplu olarak analiz etmek.</li>
+      <li>Free sürümde reklam göstermek, reklam performansını ölçmek ve reklam sahteciliğini önlemek.</li>
+      <li>Yasal yükümlülükleri yerine getirmek ve uyuşmazlıkları çözmek.</li>
+    </ul>
+
+    <h2>3. Üçüncü taraf hizmetleri ve veri paylaşımı</h2>
+    <p>NetAidat kişisel verileri satmaz veya kiralamaz. Aşağıdaki hizmet sağlayıcılar, ilgili özelliğin çalışması için sınırlı verileri kendi şartları kapsamında işleyebilir:</p>
+
+    <h3>3.1. Firebase ve Google Cloud</h3>
+    <p>
+      Firebase Authentication hesap ve giriş işlemleri; Firebase Analytics uygulama etkileşimlerinin analizi; Firebase Crashlytics hata ve tanılama işlemleri; Cloud Functions ve Firestore ise Google Play satın alma doğrulaması, premium erişim, iade ve güvenlik kayıtları için kullanılır. Kimlik doğrulanmış isteklerde UID ve IP adresi işlenebilir.
+    </p>
+
+    <h3>3.2. Google Mobile Ads (AdMob)</h3>
+    <p>
+      Free sürümde banner reklam gösterilebilir. Google Mobile Ads; IP adresi ve bundan tahmin edilen yaklaşık konum, uygulama etkileşimleri, tanılama bilgileri, reklam kimliği ve benzeri cihaz tanımlayıcılarını reklam, analiz ve sahtekârlık önleme amaçlarıyla toplayabilir ve paylaşabilir. NetAidat; bina, malik/kiracı, finans veya yedek verilerini reklam hedefleme amacıyla AdMob’a göndermez. Kullanılabilir olduğunda reklam gizliliği seçenekleri uygulamadaki destek/gizlilik alanından yönetilebilir.
+    </p>
+
+    <h3>3.3. Google Play Faturalandırma</h3>
+    <p>
+      Uygulama içi satın alma Google Play üzerinden yapılır. NetAidat, ürün sahipliğini doğrulamak ve geri yüklemek için sınırlı satın alma geçmişini Google Play Developer API aracılığıyla kontrol eder.
+    </p>
+
+    <h3>3.4. Google Drive</h3>
+    <p>
+      Kullanıcı Drive yedeklemesini seçtiğinde uygulama yalnızca kullanıcının NetAidat için oluşturduğu veya seçtiği yedek dosyalarına erişmek üzere <code>drive.file</code> yetkisi ister. Yedek dosyaları kullanıcının Google Drive hesabında saklanır ve kullanıcı tarafından yönetilir veya silinir.
+    </p>
+
+    <h3>3.5. Kullanıcı tarafından başlatılan paylaşımlar</h3>
+    <p>
+      Kullanıcı telefonla arama, WhatsApp, e-posta, PDF/rapor paylaşımı veya cihazın paylaşım menüsünü seçerse ilgili telefon numarası ya da dosya seçilen uygulamaya aktarılabilir. Bu aktarım yalnızca kullanıcının açık eylemiyle gerçekleşir ve seçilen hizmetin gizlilik koşullarına tabidir.
+    </p>
+
+    <h2>4. İzinler ve erişimler</h2>
+    <ul>
+      <li><strong>İnternet:</strong> Firebase, Google giriş, Drive, satın alma doğrulaması, reklam ve destek bağlantıları için kullanılır.</li>
+      <li><strong>Kamera:</strong> QR kod okutma, belge doğrulama ve kullanıcı tarafından başlatılan fotoğraf işlemleri için kullanılır.</li>
+      <li><strong>Dosya seçimi/depolama:</strong> Yedek oluşturma ve geri yükleme, PDF/görsel seçme ve dışa aktarma için kullanılır.</li>
+      <li><strong>Telefon özelliği:</strong> Kullanıcı bir telefon numarasına dokunduğunda cihazın arama ekranını açmak için kullanılır; NetAidat arama kayıtlarını okumaz.</li>
+      <li><strong>Reklam kimliği:</strong> Free sürümde Google Mobile Ads tarafından reklam ve sahtekârlık önleme işlemleri için kullanılabilir.</li>
+    </ul>
+
+    <h2>5. Veri güvenliği</h2>
+    <ul>
+      <li>Firebase, Google Cloud, Google Play ve AdMob ile ağ üzerinden iletilen veriler modern aktarım güvenliği yöntemleriyle şifrelenir.</li>
+      <li>Bina ve mali kayıtlar varsayılan olarak cihazdaki uygulama alanında tutulur.</li>
+      <li>Satın alma belirtecinin tamamı veritabanında saklanmaz; geri döndürülemez SHA-256 özeti kullanılır.</li>
+      <li>Satın alma doğrulama isteklerinde Firebase kimlik doğrulaması ve App Check kontrolleri uygulanır.</li>
+      <li>Kullanıcının dışa aktardığı veya Drive’a yüklediği yedek, rapor ve belgelerin erişim güvenliği seçilen konumun ve kullanıcı hesabının güvenliğine bağlıdır.</li>
+    </ul>
+    <p>Hiçbir dijital sistem mutlak güvenlik garantisi vermez. Kullanıcı cihazını, Google hesabını, parolasını ve dışa aktardığı dosyaları korumaktan sorumludur.</p>
+
+    <h2>6. Veri saklama ve silme</h2>
+    <ul>
+      <li><strong>Yerel bina ve finans verileri:</strong> Kullanıcı uygulamada sildiğinde, hesabını uygulama içinden sildiğinde veya uygulama verilerini cihazdan kaldırdığında silinir. Kullanıcının daha önce dışa aktardığı kopyalar bundan etkilenmez.</li>
+      <li><strong>Firebase Authentication hesabı:</strong> Uygulamadaki “Hesabımı Sil” işlemi tamamlandığında silinir. Firebase ve güvenlik günlüklerinde sınırlı teknik kayıtlar hizmet sağlayıcının saklama sürelerine tabi olabilir.</li>
+      <li><strong>Analiz, çökme ve reklam verileri:</strong> Firebase, Google Analytics, Crashlytics ve AdMob’un geçerli saklama ayarları ve politikaları kapsamında tutulur.</li>
+      <li><strong>Satın alma doğrulama kayıtları:</strong> Ömür boyu satın alma hakkını geri yüklemek, silinen bir hesabın satın alma hakkını yeni hesaba güvenli biçimde bağlamak, iade/iptalleri uygulamak ve kötüye kullanımı önlemek için gerekli olduğu sürece saklanabilir. Ürün kimliği, sipariş kimliği, satın alma belirteci özeti, UID/e-posta bağlantısı ve işlem zamanları bu kapsama girebilir. Ödeme kartı bilgisi saklanmaz.</li>
+      <li><strong>Yasal ve güvenlik kayıtları:</strong> Yasal yükümlülük, dolandırıcılık önleme veya uyuşmazlık çözümü için gerekli olan sınırlı bilgiler, gerekli yasal veya operasyonel süre boyunca tutulabilir; ihtiyaç sona erdiğinde silinir veya anonimleştirilir.</li>
+    </ul>
+
+    <h2>7. Kullanıcı tercihleri ve hakları</h2>
+    <p>Kullanıcılar geçerli mevzuat kapsamında verileri hakkında bilgi alma, düzeltme, silme, işlemeye itiraz etme veya destek isteme hakkına sahip olabilir.</p>
+    <ul>
+      <li>Reklam izni ve gizlilik seçenekleri, kullanılabilir olduğunda uygulamadaki ilgili gizlilik alanından değiştirilebilir.</li>
+      <li>Drive yedekleri Google Drive üzerinden silinebilir; verilen Drive izni Google hesabı ayarlarından kaldırılabilir.</li>
+      <li>Yerel kayıtlar uygulama içinden, cihaz ayarlarından veya uygulama kaldırılarak silinebilir.</li>
+      <li>Hesap silme adımları için <a href="account-deletion.html">Hesap ve Veri Silme</a> sayfası kullanılabilir.</li>
+    </ul>
+    <p>Gizlilik ve veri talepleri: <a href="mailto:netaidatufuk@gmail.com">netaidatufuk@gmail.com</a></p>
+
+    <h2>8. Çocukların gizliliği</h2>
+    <p>
+      NetAidat çocuklara yönelik değildir ve bina/site yönetimi amacıyla yetişkin kullanıcılar için hazırlanmıştır. NetAidat bilerek çocuklardan hesap verisi toplamaz. Kullanıcı üçüncü kişilere veya çocuklara ait bilgileri bina yönetimi kapsamında uygulamaya girerse, bu verileri hukuka uygun biçimde işleme yetkisine sahip olmaktan kullanıcı sorumludur.
+    </p>
+
+    <h2>9. Politika değişiklikleri</h2>
+    <p>Uygulama özellikleri, kullanılan hizmetler veya yasal/politika gereklilikleri değiştiğinde bu metin güncellenebilir. Güncel sürüm ve son güncelleme tarihi bu sayfada yayımlanır.</p>
+
+    <h2>10. Hizmet sağlayıcı bağlantıları</h2>
+    <ul>
+      <li><a href="https://policies.google.com/privacy">Google Gizlilik Politikası</a></li>
+      <li><a href="https://firebase.google.com/support/privacy">Firebase Gizlilik ve Güvenlik Bilgileri</a></li>
+      <li><a href="https://policies.google.com/technologies/ads">Google Reklam Teknolojileri</a></li>
+    </ul>
+
+    <footer>© 2026 NetAidat. Tüm hakları saklıdır.</footer>
   </main>
 </body>
 </html>
