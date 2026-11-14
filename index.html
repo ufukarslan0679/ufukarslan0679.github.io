@@ -1,174 +1,688 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NetAidat</title>
-  <meta name="description" content="NetAidat mobil uygulaması için resmi bağlantılar, gizlilik politikası ve hesap silme talep sayfası.">
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f3fafb;
-      --card: #ffffff;
-      --text: #10242b;
-      --muted: #5f747a;
-      --primary: #0e6a79;
-      --primary-dark: #09505c;
-      --border: #d5e7ea;
-      --soft: #eaf6f8;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetAidat — Aidat, kasa ve raporlar tek uygulamada</title>
+<meta name="description" content="NetAidat; eski defter devri, aidat ve tahsilat, gelir-gider, kasa, bütçe ve usta kayıtlarını tek uygulamada toplar. Raporlar ve makbuzlar PDF olarak paylaşılır.">
+<meta name="theme-color" content="#070d12">
+<meta property="og:title" content="NetAidat — Apartman aidat takibi ve kasa yönetimi">
+<meta property="og:description" content="Aidat, tahsilat, gelir-gider, kasa ve mali raporlar tek uygulamada. Abonelik yok, tek seferlik Pro.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070d12;
+    --bg-soft:#0b1620;
+    --panel:rgba(255,255,255,.035);
+    --panel-strong:rgba(255,255,255,.06);
+    --line:rgba(255,255,255,.09);
+    --line-strong:rgba(79,214,196,.28);
+    --teal:#4fd6c4;
+    --teal-deep:#2bb3a3;
+    --ink:#e9f5f5;
+    --muted:#93a8b2;
+    --radius:18px;
+    --wrap:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.brand-name{font-family:'Sora',system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 28px}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:20px;top:20px;background:var(--teal);color:#06231f;padding:10px 16px;border-radius:10px;z-index:200}
 
-    * {
-      box-sizing: border-box;
-    }
+  /* ---------- decorative background ---------- */
+  .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .bg-deco .dots{
+    position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1px);
+    background-size:34px 34px;
+    -webkit-mask-image:radial-gradient(760px 620px at 22% 10%,#000 0%,transparent 76%);
+            mask-image:radial-gradient(760px 620px at 22% 10%,#000 0%,transparent 76%);
+    opacity:.5;
+  }
+  .bg-deco .glow-a{
+    position:absolute;width:900px;height:900px;right:-180px;top:-260px;border-radius:50%;
+    background:radial-gradient(circle,rgba(20,120,120,.42) 0%,rgba(7,13,18,0) 66%);
+  }
+  .bg-deco .glow-b{
+    position:absolute;width:760px;height:760px;left:-220px;top:52%;border-radius:50%;
+    background:radial-gradient(circle,rgba(13,90,105,.38) 0%,rgba(7,13,18,0) 68%);
+  }
+  main,header,footer{position:relative;z-index:1}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(14, 106, 121, 0.16), transparent 32rem),
-        linear-gradient(180deg, #f3fafb 0%, #eef7f9 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:60;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:rgba(7,13,18,.72);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s,background .25s;
+  }
+  header.scrolled{border-bottom-color:var(--line);background:rgba(7,13,18,.9)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;height:86px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-logo{display:block;height:52px;width:auto}
+  .foot-brand .brand-logo{height:44px}
+  .brand-name{font-size:22px}
+  .brand-sub{font-size:11.5px}
+  .mark{
+    width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center;
+    filter:drop-shadow(0 8px 18px rgba(43,179,163,.32));
+  }
+  .mark img{width:100%;height:100%;object-fit:contain}
+  .brand-name{font-size:20px;color:#fff}
+  .brand-sub{display:block;font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:-2px}
+  nav{display:flex;align-items:center;gap:30px}
+  nav a{font-size:15px;font-weight:500;color:#c3d3d8;transition:color .18s}
+  nav a:hover{color:#fff}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:13px 20px;border-radius:12px;font-weight:700;font-size:15px;
+    border:1px solid transparent;transition:transform .18s,box-shadow .18s,background .18s,border-color .18s;
+    white-space:nowrap;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-primary{
+    background:linear-gradient(135deg,#57e0cd,#2bb3a3);
+    color:#04231f;
+    box-shadow:0 12px 30px rgba(43,179,163,.28);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(43,179,163,.36)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:var(--line-strong);background:rgba(79,214,196,.07);transform:translateY(-2px)}
+  .nav-cta{display:inline-flex}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:11px;width:44px;height:44px;color:var(--ink);cursor:pointer}
 
-    main {
-      width: min(980px, calc(100% - 32px));
-      margin: 40px auto;
-    }
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 24px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:'Sora',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--teal);font-weight:500;margin-bottom:22px;
+  }
+  .eyebrow:before{content:"";width:30px;height:2px;background:var(--teal);opacity:.85;border-radius:2px}
+  .hero h1{font-size:clamp(38px,5vw,64px);font-weight:600;letter-spacing:-.035em;line-height:1.06}
+  .hero h1 em{font-style:normal;color:var(--teal);display:block}
+  .lead{margin-top:22px;font-size:18px;color:#a9bcc4;max-width:520px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+  .micro{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;color:var(--muted);font-size:14px;font-weight:500}
+  .micro span{display:inline-flex;align-items:center;gap:8px}
+  .tick{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:rgba(79,214,196,.14);color:var(--teal);font-size:10px}
 
-    .hero {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: clamp(26px, 5vw, 44px);
-      box-shadow: 0 20px 48px rgba(14, 106, 121, 0.14);
-      overflow: hidden;
-      position: relative;
-    }
+  /* phone cluster */
+  .cluster{position:relative;height:600px;perspective:1800px}
+  .phone{
+    position:absolute;
+    border-radius:34px;padding:9px;
+    background:linear-gradient(150deg,#39454d 0%,#1a2228 34%,#0e1418 70%,#2b353c 100%);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 40px 80px rgba(0,0,0,.6),0 12px 30px rgba(0,0,0,.4);
+    transform-origin:50% 50%;
+  }
+  .phone .glass{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:1080/2340;background:#0f1a24}
+  .phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .phone:after{
+    content:"";position:absolute;inset:-1px;border-radius:35px;pointer-events:none;
+    background:linear-gradient(205deg,rgba(79,214,196,.34),rgba(79,214,196,0) 44%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;padding:1px;
+  }
+  .p-back-l{width:206px;left:4px;top:74px;transform:rotate(-7deg);z-index:1;opacity:.96}
+  .p-back-r{width:206px;right:2px;top:96px;transform:rotate(6.5deg);z-index:1;opacity:.96}
+  .p-front{width:268px;left:50%;margin-left:-134px;top:0;transform:rotate(-1deg);z-index:3}
+  .cluster-glow{
+    position:absolute;left:52%;top:46%;width:520px;height:520px;transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(43,179,163,.26) 0%,rgba(7,13,18,0) 66%);
+    filter:blur(10px);z-index:0;
+  }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -80px;
-      top: -80px;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: rgba(14, 106, 121, 0.08);
-    }
+  /* ---------- marquee strip ---------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;background:rgba(255,255,255,.015)}
+  .strip-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .strip-item{padding:24px 22px;border-left:1px solid var(--line);display:flex;gap:12px;align-items:center;color:#c8d7dc;font-size:15px;font-weight:600}
+  .strip-item:first-child{border-left:0}
+  .strip-item svg{color:var(--teal);flex:0 0 auto}
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 14px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--soft);
-      color: var(--primary);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
+  /* ---------- sections ---------- */
+  section{padding:96px 0}
+  .sec-head{max-width:660px;margin-bottom:46px}
+  .sec-tag{
+    font-family:'Sora',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--teal);font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  }
+  .sec-tag:before{content:"";width:22px;height:2px;background:var(--teal);opacity:.8;border-radius:2px}
+  h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.03em}
+  .sec-head p{margin-top:16px;color:var(--muted);font-size:17px}
 
-    h1 {
-      margin: 0;
-      color: var(--primary-dark);
-      line-height: 1.12;
-      font-size: clamp(42px, 8vw, 72px);
-    }
+  /* questions */
+  .qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:20px}
+  .qa-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012));
+    position:relative;overflow:hidden;
+  }
+  .qa-card:before{content:"";position:absolute;left:0;top:0;width:2px;height:100%;background:linear-gradient(180deg,var(--teal),transparent);opacity:.6}
+  .qa-card h3{font-size:19px;color:#fff;margin-bottom:10px}
+  .qa-card p{color:var(--muted);font-size:15px}
 
-    .subtitle {
-      max-width: 680px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: clamp(18px, 3vw, 22px);
-    }
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .f-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;
+    background:var(--panel);transition:border-color .2s,transform .2s,background .2s;
+  }
+  .f-card:hover{border-color:var(--line-strong);transform:translateY(-3px);background:var(--panel-strong)}
+  .f-icon{
+    width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+    background:rgba(79,214,196,.12);color:var(--teal);border:1px solid rgba(79,214,196,.2);
+  }
+  .f-card h3{font-size:18px;color:#fff;margin-bottom:9px}
+  .f-card p{color:var(--muted);font-size:15px}
 
-    .links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 24px;
-    }
+  /* gallery */
+  .gallery-wrap{position:relative}
+  .gallery-wrap:after{
+    content:"";position:absolute;right:0;top:0;bottom:26px;width:110px;pointer-events:none;
+    background:linear-gradient(90deg,rgba(7,13,18,0),var(--bg));
+  }
+  .gallery{
+    display:flex;gap:22px;overflow-x:auto;padding:8px 4px 26px;
+    scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:rgba(79,214,196,.4) transparent;
+  }
+  .gallery::-webkit-scrollbar{height:6px}
+  .gallery::-webkit-scrollbar-thumb{background:rgba(79,214,196,.35);border-radius:99px}
+  .shot{scroll-snap-align:center;flex:0 0 auto;width:230px}
+  .shot .phone{position:relative;width:100%;left:auto;top:auto;right:auto;margin:0;transform:none;box-shadow:0 26px 60px rgba(0,0,0,.55)}
+  .shot figcaption{margin-top:14px;text-align:center;font-size:14px;color:var(--muted);font-weight:600}
+  .gallery-hint{margin-top:6px;font-size:13px;color:#6f838d}
 
-    .card {
-      display: block;
-      min-height: 156px;
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.82);
-      color: inherit;
-      text-decoration: none;
-      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-    }
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;counter-reset:step}
+  .step{position:relative;padding-top:26px;border-top:1px solid var(--line)}
+  .step .num{
+    font-family:'Sora',sans-serif;font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--teal);
+    display:block;margin-bottom:12px;
+  }
+  .step h3{font-size:20px;color:#fff;margin-bottom:9px}
+  .step p{color:var(--muted);font-size:15px}
 
-    .card:hover,
-    .card:focus-visible {
-      transform: translateY(-2px);
-      border-color: rgba(14, 106, 121, 0.45);
-      box-shadow: 0 14px 34px rgba(14, 106, 121, 0.14);
-      outline: none;
-    }
+  /* plans */
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .plan{border:1px solid var(--line);border-radius:22px;padding:32px;background:var(--panel)}
+  .plan.pro{
+    border-color:rgba(79,214,196,.4);
+    background:linear-gradient(160deg,rgba(79,214,196,.10),rgba(255,255,255,.02) 45%);
+    box-shadow:0 30px 70px rgba(0,0,0,.35);
+  }
+  .plan h3{font-size:17px;letter-spacing:.14em;text-transform:uppercase;font-family:'Sora',sans-serif;color:var(--teal);margin-bottom:14px}
+  .plan .price{font-family:'Sora',sans-serif;font-size:34px;font-weight:600;color:#fff;letter-spacing:-.03em;margin-bottom:6px}
+  .plan .price small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0}
+  .plan ul{list-style:none;margin-top:22px;display:grid;gap:12px}
+  .plan li{display:flex;gap:11px;color:#c6d5da;font-size:15px;align-items:flex-start}
+  .plan li svg{flex:0 0 auto;color:var(--teal);margin-top:3px}
+  .plan-note{margin-top:26px;font-size:14px;color:var(--muted)}
 
-    .card strong {
-      display: block;
-      color: var(--primary-dark);
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
+  /* faq */
+  .faq{display:grid;gap:12px;max-width:900px}
+  details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 22px;transition:border-color .2s,background .2s}
+  details[open]{border-color:var(--line-strong);background:rgba(79,214,196,.045)}
+  summary{
+    cursor:pointer;list-style:none;padding:20px 0;font-weight:700;font-size:16px;color:#eaf6f6;
+    display:flex;justify-content:space-between;align-items:center;gap:18px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";font-family:'Sora',sans-serif;font-weight:400;font-size:22px;color:var(--teal);transition:transform .2s}
+  details[open] summary:after{transform:rotate(45deg)}
+  details p{padding:0 0 22px;color:var(--muted);font-size:15px;max-width:760px}
 
-    .card span {
-      color: var(--muted);
-      font-size: 16px;
-    }
+  /* cta band */
+  .cta-band{
+    border:1px solid rgba(79,214,196,.26);border-radius:26px;padding:52px;
+    background:radial-gradient(700px 300px at 82% 20%,rgba(43,179,163,.22),transparent 70%),linear-gradient(150deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+    display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;
+  }
+  .cta-band h2{font-size:clamp(26px,3vw,36px)}
+  .cta-band p{color:var(--muted);margin-top:10px;font-size:16px}
 
-    footer {
-      margin-top: 24px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 14px;
-    }
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:52px 0 40px;margin-top:40px;background:rgba(255,255,255,.012)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+  .foot-brand p{color:var(--muted);font-size:14px;margin-top:14px;max-width:320px}
+  .foot-col h4{font-family:'Sora',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8ea3ad;margin-bottom:16px}
+  .foot-col a{display:block;color:#c3d3d8;font-size:15px;padding:5px 0;transition:color .18s}
+  .foot-col a:hover{color:var(--teal)}
+  .foot-bottom{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:#7e919a;font-size:13px}
 
-    @media (max-width: 700px) {
-      main {
-        margin: 24px auto;
-      }
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
 
-      .links {
-        grid-template-columns: 1fr;
-      }
+  /* ---------- responsive ---------- */
+  @media (max-width:1040px){
+    .hero-grid{grid-template-columns:1fr;gap:20px}
+    .cluster{height:520px;max-width:520px;margin:10px auto 0}
+    .p-front{width:236px;margin-left:-118px}
+    .p-back-l,.p-back-r{width:176px}
+    .features,.qa{grid-template-columns:repeat(2,1fr)}
+    .strip-grid{grid-template-columns:repeat(2,1fr)}
+    .strip-item:nth-child(3){border-left:0}
+    .strip-item:nth-child(n+3){border-top:1px solid var(--line)}
+  }
+  @media (max-width:820px){
+    nav{display:none}
+    .nav-cta{display:none}
+    .burger{display:grid;place-items:center}
+    .bar{height:74px}
+    .brand-logo{height:46px}
+    .brand-name{font-size:20px}
+    .menu-open nav{
+      display:flex;position:absolute;left:0;right:0;top:74px;flex-direction:column;align-items:flex-start;
+      gap:6px;padding:16px 28px 22px;background:rgba(7,13,18,.98);border-bottom:1px solid var(--line);
     }
-  </style>
+    .menu-open nav a{padding:10px 0;font-size:17px;width:100%}
+    .hero{padding:52px 0 10px}
+    section{padding:70px 0}
+    .features,.qa,.plans,.steps,.foot-grid{grid-template-columns:1fr}
+    .cta-band{padding:34px}
+    .plans{gap:16px}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 20px}
+    .hero h1{font-size:34px;letter-spacing:-.03em}
+    .cluster{height:440px}
+    .p-front{width:200px;margin-left:-100px}
+    .p-back-l,.p-back-r{width:148px;top:60px}
+    .shot{width:190px}
+    .plan{padding:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn:hover,.f-card:hover{transform:none}
+  }
+</style>
 </head>
 <body>
-  <main>
-    <section class="hero" aria-labelledby="page-title">
-      <p class="eyebrow">NetAidat resmi sayfası</p>
-      <h1 id="page-title">Hızlı ve pratik bina yönetimi</h1>
-      <p class="subtitle">
-        Bu sayfada NetAidat mobil uygulamasına ait gizlilik politikası, hesap ve veri silme talebi
-        gibi resmi bağlantılara ulaşabilirsiniz.
-      </p>
+<a class="skip" href="#main">İçeriğe geç</a>
+<div class="bg-deco"><div class="dots"></div><div class="glow-a"></div><div class="glow-b"></div></div>
 
-      <div class="links">
-        <a class="card" href="privacy-policy.html">
-          <strong>Gizlilik Politikası</strong>
-          <span>Uygulamada işlenen veriler, saklama yapısı, üçüncü taraf servisler ve kullanıcı hakları.</span>
-        </a>
-        <a class="card" href="account-deletion.html">
-          <strong>Hesap ve Veri Silme</strong>
-          <span>NetAidat hesabı ve ilişkili veriler için silme talebi adımları.</span>
+<header id="header">
+  <div class="wrap bar">
+    <a class="brand" href="#main" aria-label="NetAidat ana sayfa">
+      <img class="brand-logo" src="assets/logo.png" alt="">
+      <span>
+        <span class="brand-name">NetAidat</span>
+        <span class="brand-sub">Bina Yönetimi</span>
+      </span>
+    </a>
+    <nav id="nav">
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#ekranlar">Ekranlar</a>
+      <a href="#nasil">Nasıl çalışır</a>
+      <a href="#pro">Pro</a>
+      <a href="#sss">SSS</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="https://play.google.com/store/apps/details?id=com.netaidat.app" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1 9.9-9.9v-.3L3.6 1.8z"/><path d="M16.9 16.9l-3.3-3.3v-.3l3.3-3.3 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.4z"/><path d="M17.5 16.5L13.6 12.6 3.6 22.2c.4.4 1 .4 1.7 0l12.2-5.7"/><path d="M17.5 7.9L5.3 2.2c-.7-.4-1.3-.4-1.7 0l10 9.9 3.9-4.2z"/></svg>
+      Play'den İndir
+    </a>
+    <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="nav">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" style="padding-bottom:0">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Apartman aidat takibi</span>
+        <h1>Aidat, kasa ve raporlar <em>tek uygulamada.</em></h1>
+        <p class="lead">NetAidat yalnızca aidat takibi değil: eski defteri devralın, aidat ve giderleri yönetin, bütçe kurun, raporları ve makbuzları PDF olarak paylaşın. Bina yönetiminin tamamı tek uygulamada.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.netaidat.app" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1 9.9-9.9v-.3L3.6 1.8z"/><path d="M16.9 16.9l-3.3-3.3v-.3l3.3-3.3 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.4z"/><path d="M17.5 16.5L13.6 12.6 3.6 22.2c.4.4 1 .4 1.7 0l12.2-5.7"/><path d="M17.5 7.9L5.3 2.2c-.7-.4-1.3-.4-1.7 0l10 9.9 3.9-4.2z"/></svg>
+            Google Play'den İndir
+          </a>
+          <a class="btn btn-ghost" href="#ekranlar">Ekranları gör</a>
+        </div>
+        <div class="micro">
+          <span><i class="tick">✓</i> Abonelik yok</span>
+          <span><i class="tick">✓</i> Tek seferlik Pro</span>
+          <span><i class="tick">✓</i> Her belge PDF</span>
+        </div>
+      </div>
+
+      <div class="cluster" aria-hidden="true">
+        <div class="cluster-glow"></div>
+        <div class="phone p-back-l"><div class="glass"><img src="assets/screens/bina-listesi.jpg" alt=""></div></div>
+        <div class="phone p-back-r"><div class="glass"><img src="assets/screens/kasa.jpg" alt=""></div></div>
+        <div class="phone p-front"><div class="glass"><img src="assets/screens/ana-sayfa.jpg" alt=""></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="wrap strip-grid">
+      <div class="strip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M8 8h7M8 12h5"/></svg> Eski defterden devir</div>
+      <div class="strip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18v10H3z"/><circle cx="12" cy="12" r="2.5"/></svg> Tekli ve toplu tahsilat</div>
+      <div class="strip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16"/><path d="M7 15l3.5-4 3 2.5L20 7"/></svg> Tahmini bütçe</div>
+      <div class="strip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg> Her belge PDF + QR</div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <section id="neden">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Neden NetAidat</div>
+        <h2>Yöneticinin soruları, tek ekranda cevap.</h2>
+        <p>Ay sonunda hesap kitap yapmak yerine, durumu açtığınız anda görün.</p>
+      </div>
+      <div class="qa">
+        <div class="qa-card reveal">
+          <h3>Aidatı kim ödedi?</h3>
+          <p>Daire bazında borç, bakiye ve geçmiş ödemeler. Tekli veya toplu tahsilat; nakit ve banka ayrı kaydedilir.</p>
+        </div>
+        <div class="qa-card reveal">
+          <h3>Kasada ne kadar var?</h3>
+          <p>İşletme ve bina kasası ayrı takip edilir. Devir, tahsilat, gelir ve gider toplamlarıyla güncel kasa durumu.</p>
+        </div>
+        <div class="qa-card reveal">
+          <h3>Gider nereye gitti?</h3>
+          <p>Kategori bazında gelir-gider kaydı, bütçe dökümü ve işlem dökümü; her kayıt belgesiyle birlikte.</p>
+        </div>
+        <div class="qa-card reveal">
+          <h3>Eski defter nerede?</h3>
+          <p>Geçmiş yılların kayıtları girilir ve doğrulanır; kapanan dönemlerin raporları arşivde kalır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="ozellikler" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Özellikler</div>
+        <h2>Aidat takibinden fazlası.</h2>
+        <p>Defter devri, aidat, gelir-gider, bütçe, usta kayıtları ve PDF çıktılar; hepsi aynı uygulamada.</p>
+      </div>
+      <div class="features">
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21V7l7-4v18M10 21h11V11l-6-4"/><path d="M6 9v.01M6 13v.01M6 17v.01M14 12v.01M14 16v.01M17 11v.01M17 15v.01"/></svg></div>
+          <h3>Birden fazla bina</h3>
+          <p>Her bina için ayrı bağımsız bölüm, sakin, aidat, mali dönem ve kasa. Binalar birbirine karışmaz.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M8 8h7M8 12h5"/></svg></div>
+          <h3>Eski defterden devir</h3>
+          <p>Geçmiş yılların defter kayıtlarını girin ve doğrulayın; devir ve bakiye hesaplara yansır.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></div>
+          <h3>Aidat ve tahsilat</h3>
+          <p>Aylık ve ekstra aidat, daire bazında borç görünümü, tekli ve toplu tahsilat; nakit ve banka ayrı kaydedilir.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8h18v9H3z"/><circle cx="12" cy="12.5" r="2.2"/><path d="M6 8V6h12v2"/></svg></div>
+          <h3>Gelir-gider ve kasa</h3>
+          <p>Kategori bazlı gelir-gider kaydı; işletme ve bina kasası ayrı, kasa özeti tek ekranda.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5M4 19h16"/><path d="M7 15l3.5-4 3 2.5L20 7"/></svg></div>
+          <h3>Raporlar</h3>
+          <p>Kasa özeti, aylık ve yıllık gelir-gider, bütçe dökümü, aidat çizelgeleri ve işlem dökümü.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V4M4 20h16"/><path d="M7 16v-4M11 16V8M15 16v-6M19 16V6"/></svg></div>
+          <h3>Tahmini bütçe</h3>
+          <p>Gelecek dönem için kalem kalem tahmini bütçe oluşturun, gerçekleşen tutarlarla karşılaştırın.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18v4H3z"/><path d="M5 11v9h14v-9"/><path d="M10 15h4"/></svg></div>
+          <h3>Dönem arşivi ve yedek</h3>
+          <p>Kapanan dönemlerin kayıtları ve raporları erişilebilir kalır; bina yedeğini alıp geri yükleyebilirsiniz.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 6.5a4 4 0 105.2 5.2L21 10.4 13.6 3l-1.3 1.3a4 4 0 002.2 2.2z"/><path d="M12 10L3.5 18.5a2 2 0 002.8 2.8L15 12.6"/></svg></div>
+          <h3>Usta kayıtları</h3>
+          <p>Çalıştığınız ustaların bilgileri, son yaptığı işler ve gider makbuzları tek yerde tutulur.</p>
+        </div>
+        <div class="f-card reveal">
+          <div class="f-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12a8 8 0 11-3.2-6.4"/><path d="M21 4v5h-5"/><path d="M8 12h8M8 16h5"/></svg></div>
+          <h3>Arama, WhatsApp ve PDF</h3>
+          <p>Rehbere numara kaydetmeden sakinleri ve ustaları arayın, yazın; her belge PDF ve QR doğrulamalı.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="ekranlar" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Ekranlar</div>
+        <h2>Uygulamanın içinden.</h2>
+        <p>Bina listesinden tahsilata, makbuzdan rapora kadar günlük akışın tamamı.</p>
+      </div>
+    </div>
+    <div class="wrap gallery-wrap">
+      <div class="gallery" tabindex="0" aria-label="Uygulama ekran görüntüleri, yatay kaydırılabilir">
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/bina-listesi.jpg" alt="Bina listesi ekranı: birden fazla apartman ve bina işlemleri"></div></div><figcaption>Bina listesi</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/ana-sayfa.jpg" alt="Ana sayfa: yıllık tahsilat özeti ve kasa durumu"></div></div><figcaption>Ana sayfa</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/bolum-listesi.jpg" alt="Bölüm listesi: daire, malik ve kiracı bilgileri"></div></div><figcaption>Bölüm listesi</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/tahsilat.jpg" alt="Tahsilat ekranı: bölüm seçimi ve ödeme kaydı"></div></div><figcaption>Tahsilat</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/makbuz.jpg" alt="Makbuz detayı: PDF ve QR doğrulama"></div></div><figcaption>Makbuz detayı</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/kasa.jpg" alt="Kasa özeti: devir, tahsilat, gelir ve gider toplamları"></div></div><figcaption>Kasa özeti</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/raporlar.jpg" alt="Raporlar menüsü: yönetim raporları ve belge araçları"></div></div><figcaption>Raporlar</figcaption></figure>
+        <figure class="shot"><div class="phone"><div class="glass"><img src="assets/screens/gelir-gider.jpg" alt="Gelir gider ekleme ekranı"></div></div><figcaption>Gelir / gider</figcaption></figure>
+      </div>
+      <p class="gallery-hint">Kaydırarak diğer ekranları görebilirsiniz →</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section id="nasil" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Nasıl çalışır</div>
+        <h2>Üç adımda başlayın.</h2>
+        <p>Kurulum sihirbazı bina, bölüm, sakin ve aidat bilgilerini sırayla alır; eski defter de devralınır.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><span class="num">01</span><h3>Binayı ekleyin</h3><p>Bina adı, adres ve bağımsız bölüm sayısını girin; birden fazla bina ekleyebilirsiniz.</p></div>
+        <div class="step reveal"><span class="num">02</span><h3>Eski kayıtları devralın</h3><p>Geçmiş defter kayıtlarını girin ve doğrulayın; mali dönem, aidat ve kasa tercihi sihirbazda belirlenir.</p></div>
+        <div class="step reveal"><span class="num">03</span><h3>Yönetmeye başlayın</h3><p>Aidat, kira ve giderleri takip edin; raporları ve belgeleri PDF olarak paylaşın.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="pro" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Free ve Pro</div>
+        <h2>Abonelik yok, tek seferlik Pro.</h2>
+        <p>NetAidat'a Free hesapla başlayın; daha fazla özellik ve kullanım imkânı için tek seferlik ödemeyle Pro'ya geçin.</p>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <h3>Free</h3>
+          <div class="price">Ücretsiz <small>başlangıç</small></div>
+          <p style="color:var(--muted);font-size:15px">Bina yönetimini denemek ve küçük ölçekli takibi sürdürmek için.</p>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Bina ve bağımsız bölüm kayıtları</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Aidat takibi ve tahsilat kaydı</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Temel kasa ve rapor görünümü</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Yedekleme ve geri yükleme</li>
+          </ul>
+        </div>
+        <div class="plan pro reveal">
+          <h3>Pro</h3>
+          <div class="price">Tek seferlik <small>ömür boyu kullanım</small></div>
+          <p style="color:var(--muted);font-size:15px">Aylık veya yıllık ödeme yok; bir kez satın alın, kullanmaya devam edin.</p>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Tüm özellikler ve sınırsız kullanım</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Tüm raporlar, belgeler ve PDF çıktıları</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Reklamsız kullanım</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6"/></svg> Gelecek güncellemeler dahil</li>
+          </ul>
+          <p class="plan-note">Fiyat ve satın alma, Google Play üzerinden uygulama içinde tamamlanır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="sss" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Sık sorulanlar</div>
+        <h2>Aklınızdaki birkaç soru.</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal">
+          <summary>Birden fazla apartmanı yönetebilir miyim?</summary>
+          <p>Evet. Her bina ayrı bir kayıt olarak tutulur; bağımsız bölümler, sakinler, aidatlar, mali dönem, kasa ve raporlar binalar arasında karışmaz.</p>
+        </details>
+        <details class="reveal">
+          <summary>Abonelik ödemesi var mı?</summary>
+          <p>Hayır. NetAidat Pro tek seferlik satın almadır; aylık veya yıllık abonelik ödemesi yoktur.</p>
+        </details>
+        <details class="reveal">
+          <summary>Makbuzu PDF olarak paylaşabilir miyim?</summary>
+          <p>Evet. Tahsilat sonrası oluşan makbuzu PDF olarak paylaşabilir, yazdırabilir ve QR doğrulama ile kontrol edebilirsiniz.</p>
+        </details>
+        <details class="reveal">
+          <summary>Yedekleme nasıl çalışır?</summary>
+          <p>Bina listesindeki Yedek işlemiyle kayıtlarınızın yedeğini oluşturup dosyayı cihazınıza kaydedebilir veya paylaşabilirsiniz. Gerektiğinde aynı dosyadan geri yükleme yapılır.</p>
+        </details>
+        <details class="reveal">
+          <summary>Hangi cihazlarda çalışır?</summary>
+          <p>NetAidat Android için geliştirilmiştir ve Google Play'den indirilir. Telefon ve tabletlerde kullanılabilir.</p>
+        </details>
+        <details class="reveal">
+          <summary>Eski defter kayıtlarını aktarabilir miyim?</summary>
+          <p>Evet. Geçmiş dönem defter kayıtlarını uygulamaya girip doğrulayabilirsiniz; devir ve bakiye hesapları bu kayıtlara göre oluşur.</p>
+        </details>
+        <details class="reveal">
+          <summary>Dönem kapandıktan sonra eski kayıtlara ulaşabilir miyim?</summary>
+          <p>Evet. Kapanan dönemlerin kayıtları ve raporları arşivde kalır; dilediğiniz zaman açıp PDF olarak alabilirsiniz.</p>
+        </details>
+        <details class="reveal">
+          <summary>Rehbere numara kaydetmeden arayabilir miyim?</summary>
+          <p>Evet. Sakin ve usta kayıtlarındaki numaralarla doğrudan arayabilir, WhatsApp üzerinden yazabilirsiniz.</p>
+        </details>
+        <details class="reveal">
+          <summary>Ustaların yaptığı işleri takip edebilir miyim?</summary>
+          <p>Evet. Usta kayıtlarında iletişim bilgileri, son yapılan işler ve bu işlere ait gider makbuzları tutulur.</p>
+        </details>
+        <details class="reveal">
+          <summary>Hesabımı ve verilerimi nasıl silerim?</summary>
+          <p>Hesap ve veri silme talebi için <a href="account-deletion.html" style="color:var(--teal);text-decoration:underline">hesap ve veri silme</a> sayfasındaki adımları izleyebilirsiniz.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top:0;padding-bottom:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h2>Kurulumu bir akşamda tamamlayın.</h2>
+          <p>Aidat, kasa ve raporlar bir sonraki toplantıda hazır olsun.</p>
+        </div>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.netaidat.app" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1 9.9-9.9v-.3L3.6 1.8z"/><path d="M16.9 16.9l-3.3-3.3v-.3l3.3-3.3 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.4z"/><path d="M17.5 16.5L13.6 12.6 3.6 22.2c.4.4 1 .4 1.7 0l12.2-5.7"/><path d="M17.5 7.9L5.3 2.2c-.7-.4-1.3-.4-1.7 0l10 9.9 3.9-4.2z"/></svg>
+          Google Play'den İndir
         </a>
       </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <footer>
-      © 2026 NetAidat. Tüm hakları saklıdır.
-    </footer>
-  </main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#main">
+          <img class="brand-logo" src="assets/logo.png" alt="">
+          <span><span class="brand-name">NetAidat</span><span class="brand-sub">Bina Yönetimi</span></span>
+        </a>
+        <p>Küçük ve orta ölçekli apartmanlar için aidat takibi, tahsilat, kasa yönetimi ve mali raporlar.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Uygulama</h4>
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#ekranlar">Ekranlar</a>
+        <a href="#pro">Free ve Pro</a>
+        <a href="#sss">SSS</a>
+      </div>
+      <div class="foot-col">
+        <h4>Yasal</h4>
+        <a href="privacy-policy.html">Gizlilik Politikası</a>
+        <a href="account-deletion.html">Hesap ve Veri Silme</a>
+        <a href="mailto:netaidatufuk@gmail.com">netaidatufuk@gmail.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NetAidat · Ufuk Arslan</span>
+      <span>Google Play ve Google Play logosu Google LLC'nin ticari markalarıdır.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header shadow
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', () => {
+    const open = header.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+  });
+  document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => {
+    header.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const items = document.querySelectorAll('.reveal');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  } else {
+    items.forEach(el => el.classList.add('in'));
+  }
+</script>
 </body>
 </html>
