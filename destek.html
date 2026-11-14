@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Destek — NetAidat</title>
+<meta name="description" content="NetAidat destek: sorular, hata bildirimleri ve öneriler için iletişim adresi.">
+<meta name="theme-color" content="#070d12">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070d12;--panel:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);
+    --teal:#4fd6c4;--ink:#e9f5f5;--muted:#93a8b2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  h1,h2,h3,.brand-name{font-family:'Sora',system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+  .deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .deco .dots{
+    position:absolute;inset:0;opacity:.5;
+    background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1px);
+    background-size:34px 34px;
+    -webkit-mask-image:radial-gradient(700px 520px at 20% 0%,#000 0%,transparent 76%);
+            mask-image:radial-gradient(700px 520px at 20% 0%,#000 0%,transparent 76%);
+  }
+  .deco .glow{position:absolute;width:880px;height:880px;right:-200px;top:-320px;border-radius:50%;
+    background:radial-gradient(circle,rgba(20,120,120,.40) 0%,rgba(7,13,18,0) 66%)}
+  header,main,footer{position:relative;z-index:1}
+  header{border-bottom:1px solid var(--line);background:rgba(7,13,18,.7);backdrop-filter:blur(14px)}
+  .wrap{width:100%;max-width:900px;margin:0 auto;padding:0 28px}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:86px;gap:20px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:52px;width:auto;display:block}
+  .brand-name{font-size:22px;color:#fff;display:block}
+  .brand-sub{display:block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:-2px}
+  .back{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#c3d3d8;border:1px solid var(--line);padding:10px 16px;border-radius:11px;transition:.18s}
+  .back:hover{border-color:rgba(79,214,196,.35);color:#fff}
+
+  main{flex:1;padding:72px 0 90px}
+  .tag{display:flex;align-items:center;gap:10px;color:var(--teal);font-family:'Sora',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
+  .tag:before{content:"";width:24px;height:2px;background:var(--teal);border-radius:2px;opacity:.85}
+  h1{font-size:clamp(32px,5vw,46px);color:#fff}
+  .lead{margin-top:18px;color:#a9bcc4;font-size:17px;max-width:560px}
+
+  .mail-card{
+    margin-top:44px;border:1px solid rgba(79,214,196,.28);border-radius:22px;padding:34px;
+    background:radial-gradient(520px 220px at 88% 0%,rgba(43,179,163,.20),transparent 70%),linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  }
+  .mail-card .label{font-family:'Sora',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .mail-address{
+    display:block;margin-top:10px;font-family:'Sora',sans-serif;font-size:clamp(22px,3.4vw,30px);
+    font-weight:600;letter-spacing:-.02em;color:#fff;word-break:break-word;
+  }
+  .mail-address:hover{color:var(--teal)}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:12px;font-weight:700;font-size:15px;border:1px solid transparent;transition:.18s;cursor:pointer}
+  .btn-primary{background:linear-gradient(135deg,#57e0cd,#2bb3a3);color:#04231f;box-shadow:0 12px 30px rgba(43,179,163,.26)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.02);font-family:inherit}
+  .btn-ghost:hover{border-color:rgba(79,214,196,.35);background:rgba(79,214,196,.07)}
+  .note{margin-top:16px;font-size:13.5px;color:#7e919a}
+
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+  .info div{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--panel)}
+  .info h3{font-size:16px;color:#fff;margin-bottom:8px}
+  .info p{font-size:14.5px;color:var(--muted)}
+  .info ul{list-style:none;font-size:14.5px;color:var(--muted);display:grid;gap:6px}
+  .info li{padding-left:18px;position:relative}
+  .info li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--teal);opacity:.8}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;background:rgba(255,255,255,.012)}
+  .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:13.5px;color:#7e919a}
+  .foot a:hover{color:var(--teal)}
+  .foot nav{display:flex;gap:20px;flex-wrap:wrap}
+
+  @media (max-width:640px){
+    .wrap{padding:0 20px}
+    .bar{height:74px}
+    .brand img{height:46px}
+    .brand-name{font-size:20px}
+    .back span{display:none}
+    main{padding:48px 0 70px}
+    .mail-card{padding:24px}
+    .info{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="deco"><div class="dots"></div><div class="glow"></div></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="NetAidat ana sayfa">
+      <img src="assets/logo.png" alt="">
+      <span>
+        <span class="brand-name">NetAidat</span>
+        <span class="brand-sub">Bina Yönetimi</span>
+      </span>
+    </a>
+    <a class="back" href="index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>Ana sayfa</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="tag">Destek</div>
+    <h1>Size nasıl yardımcı olabiliriz?</h1>
+    <p class="lead">Soru, öneri ve hata bildirimleri için doğrudan e-posta gönderebilirsiniz. Mesajınızı gördüğümüzde en kısa sürede dönüş yapıyoruz.</p>
+
+    <section class="mail-card" aria-labelledby="mail-label">
+      <span class="label" id="mail-label">Destek e-postası</span>
+      <a class="mail-address" href="mailto:netaidatufuk@gmail.com?subject=NetAidat%20Destek">netaidatufuk@gmail.com</a>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:netaidatufuk@gmail.com?subject=NetAidat%20Destek">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+          E-posta gönder
+        </a>
+        <button class="btn btn-ghost" id="copy" data-mail="netaidatufuk@gmail.com">Adresi kopyala</button>
+      </div>
+      <p class="note">Yanıt süresi genellikle 1–2 iş günü.</p>
+    </section>
+
+    <div class="info">
+      <div>
+        <h3>Daha hızlı yanıt için</h3>
+        <ul>
+          <li>Kullandığınız cihaz ve Android sürümü</li>
+          <li>Uygulama sürümü (Ayarlar → Hakkında)</li>
+          <li>Sorunun hangi ekranda olduğu</li>
+          <li>Varsa ekran görüntüsü</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Yasal bağlantılar</h3>
+        <p style="margin-bottom:12px">Gizlilik ve veri işleme detayları için:</p>
+        <ul>
+          <li><a href="privacy-policy.html" style="color:var(--teal)">Gizlilik Politikası</a></li>
+          <li><a href="account-deletion.html" style="color:var(--teal)">Hesap ve Veri Silme</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 NetAidat · Ufuk Arslan</span>
+    <nav>
+      <a href="index.html">Ana sayfa</a>
+      <a href="privacy-policy.html">Gizlilik Politikası</a>
+      <a href="account-deletion.html">Hesap Silme</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('copy');
+  btn.addEventListener('click', async () => {
+    const mail = btn.dataset.mail;
+    try { await navigator.clipboard.writeText(mail); }
+    catch (e) {
+      const t = document.createElement('textarea');
+      t.value = mail; document.body.appendChild(t); t.select();
+      document.execCommand('copy'); t.remove();
+    }
+    const old = btn.textContent;
+    btn.textContent = 'Kopyalandı';
+    setTimeout(() => { btn.textContent = old; }, 1800);
+  });
+</script>
+</body>
+</html>
